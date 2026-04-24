@@ -1,18 +1,25 @@
 # 🏥 Health Insurance Premium Prediction System
 
-An end-to-end machine learning application that predicts health insurance premiums based on user demographics, lifestyle, and medical history. This project combines **feature engineering, model segmentation, and an interactive web interface** to deliver accurate and user-friendly predictions.
+## 🌐 Live Application
+
+🚀 **Try the app here:**  
+👉 https://ml-project-health-insurance-premium-predictor.streamlit.app/
+
+[![Live App](https://img.shields.io/badge/Live-App-green)](https://ml-project-health-insurance-premium-predictor.streamlit.app/)
+
+_No installation required — works directly in your browser._
 
 ---
 
 ## 🚀 Highlights
 
-- 🔢 Real-time premium prediction via Streamlit  
-- 🧠 **Segmented ML architecture**:
-  - Separate models for different age groups (≤25 and >25)
-- 🧬 Custom **medical risk scoring system**
-- ⚙️ Full preprocessing pipeline (encoding + scaling)
-- 📊 Structured feature engineering for improved model performance  
-- 🎯 Clean and interactive UI with reset functionality and animations  
+- 🔢 Real-time insurance premium prediction  
+- 🧠 **Segmented ML architecture** (age-based models)  
+- 🧬 Custom **medical risk scoring system**  
+- ⚙️ End-to-end preprocessing pipeline (encoding + scaling)  
+- 🎯 Clean and interactive UI built with Streamlit  
+- 🔄 Fully functional reset (true form reset using key-versioning)  
+- ⚡ Smooth user experience with responsive design  
 
 ---
 
@@ -20,16 +27,16 @@ An end-to-end machine learning application that predicts health insurance premiu
 
 ### 1. Problem Type
 - Supervised Learning  
-- Regression problem (predicting continuous premium value)
+- Regression (predicting continuous insurance premium)
 
 ---
 
 ### 2. Feature Engineering
 
-A key highlight of this project is the **custom normalized risk score**:
+A key highlight of this project is the **custom normalized medical risk score**:
 
-- Converts medical history into numerical risk  
-- Supports multiple conditions (e.g., *Diabetes & High Blood Pressure*)  
+- Converts medical history into numerical values  
+- Handles multiple conditions (e.g., *Diabetes & High BP*)  
 - Weighted scoring system:
   - Heart disease → high risk  
   - Diabetes / BP → medium risk  
@@ -42,19 +49,33 @@ A key highlight of this project is the **custom normalized risk score**:
 
 Instead of using a single model:
 
-- **Model 1 (Young Users ≤ 25)**  
-- **Model 2 (Adults > 25)**  
+- **Model 1 → Young Users (≤ 25)**  
+- **Model 2 → Adults (> 25)**  
 
-This improves prediction accuracy by capturing different risk patterns across age groups.
+👉 This improves prediction accuracy by capturing different behavioral and health risk patterns.
 
 ---
 
 ### 4. Preprocessing Pipeline
 
 - Manual one-hot encoding for categorical variables  
-- Plan encoding (Bronze → 1, Silver → 2, Gold → 3)  
-- Age-based dynamic scaling using separate scalers  
+- Insurance plan encoding:
+  - Bronze → 1  
+  - Silver → 2  
+  - Gold → 3  
+- Age-based scaling using separate scalers  
 - Ensures consistent feature structure for model input  
+
+---
+
+## 📊 Application Workflow
+
+1. User enters personal, health, and policy details  
+2. Medical history → converted into normalized risk score  
+3. Data → encoded and scaled  
+4. Model selection based on age  
+5. Prediction generated  
+6. Result displayed via interactive UI  
 
 ---
 
@@ -63,20 +84,20 @@ This improves prediction accuracy by capturing different risk patterns across ag
 - **Frontend:** Streamlit  
 - **Backend:** Python  
 - **Machine Learning:** Scikit-learn  
-- **Model Persistence:** Joblib  
+- **Model Storage:** Joblib  
 - **Data Processing:** Pandas, NumPy  
 
 ---
 
-## 📊 Workflow
+## 🔁 Reset Functionality (Key Highlight)
 
-1. User inputs personal, health, and policy details  
-2. Medical history is converted into a normalized risk score  
-3. Data is encoded and scaled dynamically  
-4. Based on age:
-   - Young model OR Adult model is selected  
-5. Model predicts insurance premium  
-6. Result is displayed via an interactive UI  
+A true reset functionality was implemented using **dynamic key versioning**:
+
+- Streamlit widgets retain state by default  
+- Instead of clearing state, widget keys are dynamically changed  
+- This forces reinitialization of all inputs  
+
+👉 Result: behaves like a full page refresh
 
 ---
 
@@ -87,4 +108,3 @@ git clone https://github.com/Saurabh136/ML_Project_Health_Insurance_Premium_Pred
 cd <project-folder>
 pip install -r requirements.txt
 streamlit run main.py
-
