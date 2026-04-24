@@ -7,6 +7,10 @@ st.set_page_config(
     layout="wide"
 )
 
+# ------------------ FORM KEY (RESET ENGINE) ------------------ #
+if "form_key" not in st.session_state:
+    st.session_state.form_key = 0
+
 # ------------------ PROFESSIONAL CSS ------------------ #
 st.markdown("""
 <style>
@@ -194,31 +198,25 @@ categorical_options = {
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.markdown('<div class="section-block">', unsafe_allow_html=True)
     st.markdown('<div class="section-header">👤 Personal Details</div>', unsafe_allow_html=True)
-    age = st.number_input('Age', 18, 100)
-    dependants = st.number_input('Number of Dependants', 0, 20)
-    income = st.number_input('Income (Lakhs)', 0, 200)
-    st.markdown('</div>', unsafe_allow_html=True)
+    age = st.number_input('Age', 18, 100, key=f"age_{st.session_state.form_key}")
+    dependants = st.number_input('Number of Dependants', 0, 20, key=f"dep_{st.session_state.form_key}")
+    income = st.number_input('Income (Lakhs)', 0, 200, key=f"inc_{st.session_state.form_key}")
 
 with col2:
-    st.markdown('<div class="section-block">', unsafe_allow_html=True)
     st.markdown('<div class="section-header">🧬 Health Information</div>', unsafe_allow_html=True)
-    genetical_risk = st.number_input('Genetic Risk Score (0–5)', 0, 5)
-    bmi = st.selectbox('BMI Category', categorical_options['BMI Category'])
-    smoking = st.selectbox('Smoking Status', categorical_options['Smoking Status'])
-    st.markdown('</div>', unsafe_allow_html=True)
+    genetical_risk = st.number_input('Genetic Risk Score (0–5)', 0, 5, key=f"risk_{st.session_state.form_key}")
+    bmi = st.selectbox('BMI Category', categorical_options['BMI Category'], key=f"bmi_{st.session_state.form_key}")
+    smoking = st.selectbox('Smoking Status', categorical_options['Smoking Status'], key=f"smoking_{st.session_state.form_key}")
 
 with col3:
-    st.markdown('<div class="section-block">', unsafe_allow_html=True)
     st.markdown('<div class="section-header">📋 Policy Details</div>', unsafe_allow_html=True)
-    plan = st.selectbox('Insurance Plan', categorical_options['Insurance Plan'])
-    employment = st.selectbox('Employment Status', categorical_options['Employment Status'])
-    medical = st.selectbox('Medical History', categorical_options['Medical History'])
-    gender = st.selectbox('Gender', categorical_options['Gender'])
-    marital = st.selectbox('Marital Status', categorical_options['Marital Status'])
-    region = st.selectbox('Region', categorical_options['Region'])
-    st.markdown('</div>', unsafe_allow_html=True)
+    plan = st.selectbox('Insurance Plan', categorical_options['Insurance Plan'], key=f"plan_{st.session_state.form_key}")
+    employment = st.selectbox('Employment Status', categorical_options['Employment Status'], key=f"emp_{st.session_state.form_key}")
+    medical = st.selectbox('Medical History', categorical_options['Medical History'], key=f"med_{st.session_state.form_key}")
+    gender = st.selectbox('Gender', categorical_options['Gender'], key=f"gender_{st.session_state.form_key}")
+    marital = st.selectbox('Marital Status', categorical_options['Marital Status'], key=f"marital_{st.session_state.form_key}")
+    region = st.selectbox('Region', categorical_options['Region'], key=f"region_{st.session_state.form_key}")
 
 # ------------------ INPUT DICT ------------------ #
 input_dict = {
@@ -236,10 +234,9 @@ input_dict = {
     'Medical History': medical
 }
 
-# ------------------ BUTTON + RESULT ------------------ #
+# ------------------ BUTTONS ------------------ #
 st.markdown("<br>", unsafe_allow_html=True)
 
-# Center the buttons
 center_col = st.columns([1,2,1])[1]
 
 with center_col:
@@ -251,11 +248,12 @@ with center_col:
     with col_btn2:
         reset = st.button("Reset")
 
-# Handle Reset
+# ------------------ RESET LOGIC ------------------ #
 if reset:
+    st.session_state.form_key += 1
     st.rerun()
 
-# Handle Prediction
+# ------------------ RESULT ------------------ #
 if calculate:
     with st.spinner("Calculating..."):
         prediction = predict(input_dict)
