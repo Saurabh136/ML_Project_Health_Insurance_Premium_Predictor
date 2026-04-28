@@ -3,7 +3,8 @@
 ## 🌐 Live Application
 
 🚀 **Try the app here:**  
-👉 https://ml-project-health-insurance-premium-predictor.streamlit.app/
+👉 https://ml-project-health-insurance-premium-predictor.streamlit.app/ 
+[![Live App](https://img.shields.io/badge/Live-App-green)](https://ml-project-health-insurance-premium-predictor.streamlit.app/)
 
 _No installation required — works directly in your browser._
 
@@ -148,7 +149,7 @@ A true reset functionality was implemented using **dynamic key versioning**:
 ## 📦 Installation & Setup
 
 ```bash
-git clone <your-repo-link>
+git clone https://github.com/Saurabh136/ML_Project_Health_Insurance_Premium_Predictor.git
 cd <project-folder>
 pip install -r requirements.txt
 streamlit run main.py
