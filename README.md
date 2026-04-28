@@ -5,8 +5,6 @@
 🚀 **Try the app here:**  
 👉 https://ml-project-health-insurance-premium-predictor.streamlit.app/
 
-[![Live App](https://img.shields.io/badge/Live-App-green)](https://ml-project-health-insurance-premium-predictor.streamlit.app/)
-
 _No installation required — works directly in your browser._
 
 ---
@@ -15,7 +13,7 @@ _No installation required — works directly in your browser._
 
 - 🔢 Real-time insurance premium prediction  
 - 🧠 **Segmented ML architecture** (age-based models)  
-- 🧬 Custom **medical risk scoring system**  
+- 🧬 Custom **Genetic Risk feature engineering**  
 - ⚙️ End-to-end preprocessing pipeline (encoding + scaling)  
 - 🎯 Clean and interactive UI built with Streamlit  
 - 🔄 Fully functional reset (true form reset using key-versioning)  
@@ -68,6 +66,52 @@ Instead of using a single model:
 
 ---
 
+## 📊 Model Performance & Impact of Feature Engineering
+
+### 🔹 Young Model (≤ 25) — Before Genetic Risk
+
+| Model | Train Score | Test Score |
+|------|------------|-----------|
+| Linear Regression | 0.6020 | 0.6047 |
+| XGBoost | ~0.603 | ~0.60 |
+
+- ⚠️ **Extreme Error (>10%)**: **73%**
+
+---
+
+### 🔹 Young Model (≤ 25) — After Genetic Risk
+
+| Model | Train Score | Test Score |
+|------|------------|-----------|
+| Linear Regression | 0.9882 | 0.9887 |
+| XGBoost | ~0.987 | ~0.98 |
+
+- ✅ **Extreme Error (>10%) reduced to: ~2%**
+
+---
+
+### 🔹 Rest Model (> 25)
+
+| Model | Train Score | Test Score |
+|------|------------|-----------|
+| Linear / Ridge Regression | ~0.953 | ~0.953 |
+| XGBoost | ~0.994 |
+
+- ✅ **Extreme Error (>10%)**: **~0.3%**
+
+---
+
+## 🎯 Key Insight
+
+The introduction of the **Genetic Risk feature** led to a **massive performance improvement** for the young age group:
+
+- 📉 Extreme error reduced from **73% → 2%**  
+- 📈 Model accuracy improved from ~0.60 → ~0.98  
+
+👉 This demonstrates the **critical role of domain-specific feature engineering in machine learning performance**
+
+---
+
 ## 📊 Application Workflow
 
 1. User enters personal, health, and policy details  
@@ -83,7 +127,7 @@ Instead of using a single model:
 
 - **Frontend:** Streamlit  
 - **Backend:** Python  
-- **Machine Learning:** Scikit-learn  
+- **Machine Learning:** Scikit-learn, XGBoost  
 - **Model Storage:** Joblib  
 - **Data Processing:** Pandas, NumPy  
 
@@ -104,7 +148,7 @@ A true reset functionality was implemented using **dynamic key versioning**:
 ## 📦 Installation & Setup
 
 ```bash
-git clone https://github.com/Saurabh136/ML_Project_Health_Insurance_Premium_Predictor.git
+git clone <your-repo-link>
 cd <project-folder>
 pip install -r requirements.txt
 streamlit run main.py
